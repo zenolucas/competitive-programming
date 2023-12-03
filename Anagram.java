@@ -27,7 +27,7 @@ public class Anagram {
         // Complete the function
         ArrayList<Character> arrayList = new ArrayList<>();
 
-        // populate distinct letters in arrayList
+        // populate distinct let1ters in arrayList
         for (int i = 0; i < a.length(); i++)
         {
             char letter = a.charAt(i);
