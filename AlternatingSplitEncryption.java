@@ -1,13 +1,22 @@
+import java.util.ArrayList;
+import java.util.Objects;
+
 public class AlternatingSplitEncryption {
     public static void main(String[] args) {
 
-        System.out.println(encrypt("012345", 3));
+        System.out.println(decrypt("hsi  etTi sats!", 1));
     }
 
 
     public static String encrypt(final String text, final int n) {
         String answer = "";
         String temp = text;
+
+        if (n == 0 || Objects.equals(text, "") || text == null)
+        {
+            return text;
+        }
+
         for (int i = 0; i < n; i++)
         {
             answer = "";
@@ -36,7 +45,51 @@ public class AlternatingSplitEncryption {
     }
 
     public static String decrypt(final String encryptedText, final int n) {
-        // Your code here
-        return null;
+        String decryptedText = "";
+        String temp = encryptedText;
+
+        for (int a = 0; a < n; a++)
+        {
+            decryptedText = "";
+
+            if (encryptedText.length() % 2 == 0)
+            {
+                // I want to split the encryptedText into two, then alternate between them
+                String firstHalf = temp.substring(0, temp.length()/2);
+                String secondHalf = temp.substring(temp.length()/2 + 1);
+
+                char[] charArrayOdd = firstHalf.toCharArray();
+                char[] charArrayEven = secondHalf.toCharArray();
+
+                // construct decryptedText
+                for (int i = 0; i < temp.length() / 2; i++)
+                {
+                    decryptedText += charArrayEven[i];
+                    decryptedText += charArrayOdd[i];
+                }
+                temp = decryptedText;
+            }
+            else
+            {
+                String firstHalf = temp.substring(0, temp.length()/2);
+                String secondHalf = temp.substring(temp.length()/2);
+
+                char[] charArrayEven = firstHalf.toCharArray();
+                char[] charArrayOdd = secondHalf.toCharArray();
+
+                // construct decryptedText
+                for (int i = 0; i < temp.length() / 2; i++)
+                {
+                    decryptedText += charArrayOdd[i];
+                    decryptedText += charArrayEven[i];
+                }
+
+                // then add the last odd character
+                decryptedText += charArrayOdd[charArrayOdd.length - 1];
+                temp = decryptedText;
+            }
+        }
+
+        return decryptedText;
     }
 }
