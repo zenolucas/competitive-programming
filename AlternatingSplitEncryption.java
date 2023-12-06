@@ -3,8 +3,10 @@ import java.util.Objects;
 
 public class AlternatingSplitEncryption {
     public static void main(String[] args) {
+        String input = "hskt svr neetn!Ti aai eyitrsig";
+        System.out.println(input.length());
 
-        System.out.println(decrypt("hsi  etTi sats!", 1));
+        System.out.println(decrypt(input, 1));
     }
 
 
@@ -12,7 +14,12 @@ public class AlternatingSplitEncryption {
         String answer = "";
         String temp = text;
 
-        if (n == 0 || Objects.equals(text, "") || text == null)
+        if (text == null)
+        {
+            return null;
+        }
+
+        if (n <= 0 || Objects.equals(text, ""))
         {
             return text;
         }
@@ -48,6 +55,16 @@ public class AlternatingSplitEncryption {
         String decryptedText = "";
         String temp = encryptedText;
 
+        if (encryptedText == null)
+        {
+            return null;
+        }
+
+        if (n <= 0 || Objects.equals(encryptedText, ""))
+        {
+            return encryptedText;
+        }
+
         for (int a = 0; a < n; a++)
         {
             decryptedText = "";
@@ -56,7 +73,7 @@ public class AlternatingSplitEncryption {
             {
                 // I want to split the encryptedText into two, then alternate between them
                 String firstHalf = temp.substring(0, temp.length()/2);
-                String secondHalf = temp.substring(temp.length()/2 + 1);
+                String secondHalf = temp.substring(temp.length()/2);
 
                 char[] charArrayOdd = firstHalf.toCharArray();
                 char[] charArrayEven = secondHalf.toCharArray();
